@@ -31,7 +31,7 @@ $_SESSION['token'] = $token;
         <?php endif; ?>
         <div>
             <div class="mb-3">
-                <input type="number" min="1" max="10" name="year" placeholder="学年">
+                <input type="number" min="1" max="10" class="form-control" id="year" name="year" placeholder="">
             </div>
             <div class="mb-3">
                 <select name="name">
