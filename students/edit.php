@@ -31,7 +31,7 @@ $_SESSION['token'] = $token;
     <form method="POST" action="update.php">
         <input type="hidden" name="id" value="<?php echo $student['id']; ?>">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token, ENT_COMPAT, 'UTF-8'); ?>">
-        <input type="number" min="1" max="10" name="year" value="<?php echo $student['year'] ?>">
+        <input type="number" min="1" max="3" name="year" value="<?php echo $student['year'] ?>">
         <input type="number" min="1" max="10" name="class" value="<?php echo $student['class'] ?>">
         <input type="number" min="1" max="10" name="number" value="<?php echo $student['number'] ?>">
         <input type="text" name="name" value="<?php echo $student['name'] ?>">

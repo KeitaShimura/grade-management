@@ -5,12 +5,46 @@ try {
     echo 'DB接続エラー:' . $e->getMessage();
 }
 
-$tests = $db->query("SELECT DISTINCT name FROM tests");
-
 $exams = $db->prepare("SELECT students.number as student_number, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id WHERE tests.name = ?");
-$exams->execute(array($_GET['test_name']));
+    $exams->execute(array($_GET['test_name']));
+    $tests = $db->query("SELECT DISTINCT name FROM tests");
+
+// if (isset($_GET['test_name'])) {
+    
+// } else {
+//     $exams = $db->prepare("SELECT students.number as student_number, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id");
+// }
 $exams = $exams->fetchAll();
 
+if (isset($_GET['sort_key'])) {
+    if ($_GET['sort_key'] == 'student_number') {
+        array_multisort(array_column($exams, 'student_number'), SORT_ASC, $exams);
+    } 
+    
+    if ($_GET['sort_key'] == 'kokugo') {
+        array_multisort(array_column($exams, 'kokugo'), SORT_DESC, $exams);
+    } 
+    
+    if ($_GET['sort_key'] == 'sugaku') {
+        array_multisort(array_column($exams, 'sugaku'), SORT_DESC, $exams);
+    } 
+    
+    if ($_GET['sort_key'] == 'eigo') {
+        array_multisort(array_column($exams, 'eigo'), SORT_DESC, $exams);
+    } 
+    
+    if ($_GET['sort_key'] == 'rika') {
+        array_multisort(array_column($exams, 'rika'), SORT_DESC, $exams);
+    } 
+    
+    if ($_GET['sort_key'] == 'shakai') {
+        array_multisort(array_column($exams, 'shakai'), SORT_DESC, $exams);
+    } 
+    
+    if ($_GET['sort_key'] == 'goukei') {
+        array_multisort(array_column($exams, 'goukei'), SORT_DESC, $exams);
+    }
+}
 
 ?>
 
@@ -35,24 +69,37 @@ $exams = $exams->fetchAll();
 
     <table class="table" style="margin:30px auto; text-align: center; border-top: 1px solid lightgray; width:80%;">
         <thead style="height: 50px;">
-            <tr>
-                <th class="col-3" style="font-weight: bold;">学生番号</th>
-                <th class="col-3" style="font-weight: bold;">名前</th>
-                <th class="col-3" style="font-weight: bold;">国語</th>
-                <th class="col-3" style="font-weight: bold;">数学</th>
-                <th class="col-3" style="font-weight: bold;">英語</th>
-                <th class="col-3" style="font-weight: bold;">理科</th>
-                <th class="col-3" style="font-weight: bold;">社会</th>
-                <th class="col-3" style="font-weight: bold;">合計</th>
-            </tr>
+            <!-- <?php if (isset($_GET['test_name'])) : ?> -->
+                <tr>
+                    <th class="col-3" style="font-weight: bold;">学生番号<a href="result.php?sort_key=student_number&test_name=<?php echo $_GET['test_name']; ?>">▽</a></th>
+                    <th class="col-3" style="font-weight: bold;">名前</th>
+                    <th class="col-3" style="font-weight: bold;">国語<a href="result.php?sort_key=kokugo&test_name=<?php echo $_GET['test_name']; ?>">▽</a></th>
+                    <th class="col-3" style="font-weight: bold;">数学<a href="result.php?sort_key=sugaku&test_name=<?php echo $_GET['test_name']; ?>">▽</a></th>
+                    <th class="col-3" style="font-weight: bold;">英語<a href="result.php?sort_key=eigo&test_name=<?php echo $_GET['test_name']; ?>">▽</a></th>
+                    <th class="col-3" style="font-weight: bold;">理科<a href="result.php?sort_key=rika&test_name=<?php echo $_GET['test_name']; ?>">▽</a></th>
+                    <th class="col-3" style="font-weight: bold;">社会<a href="result.php?sort_key=shakai&test_name=<?php echo $_GET['test_name']; ?>">▽</a></th>
+                    <th class="col-3" style="font-weight: bold;">合計<a href="result.php?sort_key=goukei&test_name=<?php echo $_GET['test_name']; ?>">▽</a></th>
+                </tr>
+            <!-- <?php else : ?> -->
+                <tr>
+                    <th class="col-3" style="font-weight: bold;">学生</th>
+                    <th class="col-3" style="font-weight: bold;">名前</th>
+                    <th class="col-3" style="font-weight: bold;">国語</th>
+                    <th class="col-3" style="font-weight: bold;">数学</th>
+                    <th class="col-3" style="font-weight: bold;">英語</th>
+                    <th class="col-3" style="font-weight: bold;">理科</th>
+                    <th class="col-3" style="font-weight: bold;">社会</th>
+                    <th class="col-3" style="font-weight: bold;">合計</th>
+                </tr>
+            <!-- <?php endif; ?> -->
         </thead>
         <tbody>
             <?php foreach ($exams as $exam) : ?>
                 <tr>
                     <td class="col-3" style="text-align: left; vertical-align: middle;"><?php print($exam['student_number']); ?></td>
                     <td class="col-3" style="text-align: left; vertical-align: middle;"><?php print($exam['student_name']); ?></td>
-                    <td class="col-3" style="text-align: left; vertical-align: middle;"><?php print($exam['sugaku']); ?></td>
                     <td class="col-3" style="text-align: left; vertical-align: middle;"><?php print($exam['kokugo']); ?></td>
+                    <td class="col-3" style="text-align: left; vertical-align: middle;"><?php print($exam['sugaku']); ?></td>
                     <td class="col-3" style="text-align: left; vertical-align: middle;"><?php print($exam['eigo']); ?></td>
                     <td class="col-3" style="text-align: left; vertical-align: middle;"><?php print($exam['rika']); ?></td>
                     <td class="col-3" style="text-align: left; vertical-align: middle;"><?php print($exam['shakai']); ?></td>

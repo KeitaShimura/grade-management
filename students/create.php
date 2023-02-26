@@ -26,7 +26,7 @@ $_SESSION['token'] = $token;
     <h1>テスト登録画面</h1>
     <form method="POST" action="save.php">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token, ENT_COMPAT, 'UTF-8'); ?>">
-        <input type="number" min="1" max="10" name="year" placeholder="学年">
+        <input type="number" min="1" max="3" name="year" placeholder="学年">
         <input type="number" min="1" max="10" name="class" placeholder="クラス">
         <input type="number" min="1" max="10" name="number" placeholder="学年">
         <input type="text" name="name" placeholder="名前">

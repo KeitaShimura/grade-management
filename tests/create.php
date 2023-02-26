@@ -25,7 +25,7 @@ $_SESSION['token'] = $token;
     <h1>テスト登録画面</h1>
     <form method="POST" action="save.php">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token, ENT_COMPAT, 'UTF-8'); ?>">
-        <input type="number" min="1" max="10" class="form-control" id="year" name="year" placeholder="">
+        <input type="number" min="1" max="3" class="form-control" id="year" name="year" placeholder="">
         <select name="name">
             <option type="hidden">テストを選択</option>
             <option>前期中間テスト</option>
