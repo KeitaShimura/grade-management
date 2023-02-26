@@ -21,14 +21,6 @@ $_SESSION['token'] = $token;
     <h1>テスト登録画面</h1>
     <form method="POST" action="save.php">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token, ENT_COMPAT, 'UTF-8'); ?>">
-
-        <?php if (isset($_SESSION['status'])) : ?>
-            <div class="alert alert-danger" role="alert">
-                <?php echo $_SESSION['status'];
-                unset($_SESSION['status']); ?>
-            </div>
-
-        <?php endif; ?>
         <div>
             <div class="mb-3">
                 <input type="number" min="1" max="10" class="form-control" id="year" name="year" placeholder="">

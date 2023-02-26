@@ -16,6 +16,13 @@ $tests = $db->query('SELECT * FROM tests');
 </head>
 
 <body>
+<?php if (isset($_SESSION['status'])) : ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo $_SESSION['status'];
+                unset($_SESSION['status']); ?>
+            </div>
+
+        <?php endif; ?>
     <article>
         <?php if ($tests) : ?>
             <table>
