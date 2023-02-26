@@ -5,16 +5,15 @@ try {
     echo 'DB接続エラー:' . $e->getMessage();
 }
 
-$exams = $db->prepare("SELECT students.number as student_number, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id WHERE tests.name = ?");
+if (isset($_GET['test_name'])) {
+    $exams = $db->prepare("SELECT students.number as student_number, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id WHERE tests.name = ?");
     $exams->execute(array($_GET['test_name']));
+    $exams = $exams->fetchAll();
+
+}
+
     $tests = $db->query("SELECT DISTINCT name FROM tests");
 
-// if (isset($_GET['test_name'])) {
-    
-// } else {
-//     $exams = $db->prepare("SELECT students.number as student_number, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id");
-// }
-$exams = $exams->fetchAll();
 
 if (isset($_GET['sort_key'])) {
     if ($_GET['sort_key'] == 'student_number') {
@@ -75,8 +74,9 @@ if (isset($_GET['sort_key'])) {
     </ul>
 
     <table class="table" style="margin:30px auto; text-align: center; border-top: 1px solid lightgray; width:80%;">
+    <?php if (isset($_GET['test_name'])) { ?>
+
         <thead style="height: 50px;">
-            <!-- <?php if (isset($_GET['test_name'])) : ?> -->
                 <tr>
                     <th class="col-3" style="font-weight: bold;">学生番号<a href="result.php?sort_key=student_number&test_name=<?php echo $_GET['test_name']; ?>">▽</a></th>
                     <th class="col-3" style="font-weight: bold;">名前</th>
@@ -87,18 +87,6 @@ if (isset($_GET['sort_key'])) {
                     <th class="col-3" style="font-weight: bold;">社会<a href="result.php?sort_key=shakai&test_name=<?php echo $_GET['test_name']; ?>">▽</a></th>
                     <th class="col-3" style="font-weight: bold;">合計<a href="result.php?sort_key=goukei&test_name=<?php echo $_GET['test_name']; ?>">▽</a></th>
                 </tr>
-            <!-- <?php else : ?> -->
-                <tr>
-                    <th class="col-3" style="font-weight: bold;">学生</th>
-                    <th class="col-3" style="font-weight: bold;">名前</th>
-                    <th class="col-3" style="font-weight: bold;">国語</th>
-                    <th class="col-3" style="font-weight: bold;">数学</th>
-                    <th class="col-3" style="font-weight: bold;">英語</th>
-                    <th class="col-3" style="font-weight: bold;">理科</th>
-                    <th class="col-3" style="font-weight: bold;">社会</th>
-                    <th class="col-3" style="font-weight: bold;">合計</th>
-                </tr>
-            <!-- <?php endif; ?> -->
         </thead>
         <tbody>
             <?php foreach ($exams as $exam) : ?>
@@ -114,6 +102,8 @@ if (isset($_GET['sort_key'])) {
                 </tr>
             <?php endforeach; ?>
         </tbody>
+        <?php } ?>
+
 </body>
 
 </html>
