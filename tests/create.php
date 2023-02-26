@@ -1,5 +1,9 @@
 <?php
-require_once(__DIR__ . "/../index.php");
+try {
+    $db = new PDO('mysql:dbname=grademanagement; host=127.0.0.1; charset=utf8', 'root', '');
+} catch (PDOException $e) {
+    echo 'DB接続エラー:' . $e->getMessage();
+}
 session_start();
 
 $token = bin2hex(openssl_random_pseudo_bytes(24));
