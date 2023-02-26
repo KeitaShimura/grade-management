@@ -41,7 +41,7 @@ $tests = $db->query('SELECT * FROM tests');
                             <td><?php echo ($test['id']) ?></td>
                             <td><?php echo ($test['year']); ?></td>
                             <td><?php echo ($test['name']); ?></td>
-                            <td><a href="edit.php?id=<?php print($test['id']); ?>" class="btn btn-primary">削除</a></td>
+                            <td><a href="edit.php?id=<?php print($test['id']); ?>" class="btn btn-primary">変更</a></td>
                         </tr>
 
                     <?php endwhile; ?>
