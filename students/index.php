@@ -5,7 +5,7 @@ try {
     echo 'DB接続エラー:' . $e->getMessage();
 }
 
-$tests = $db->query('SELECT * FROM students');
+$students = $db->query('SELECT * FROM students');
 
 ?>
 
@@ -28,28 +28,31 @@ $tests = $db->query('SELECT * FROM students');
 
     <?php endif; ?>
     <article>
-        <?php if ($tests) : ?>
+        <?php if ($students) : ?>
             <table>
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>学年</th>
-                        <th>テスト名</th>
+                        <th>クラス</th>
+                        <th>学生番号</th>
+                        <th>氏名</th>
                         <th>編集</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while ($test = $tests->fetch()) : ?>
+                    <?php foreach ($students as $student) : ?>
 
-                        <tr id="tr<?php echo ($test['id']); ?>">
-                            <td><?php echo ($test['year']); ?></td>
-                            <td><?php echo ($test['class']) ?></td>
-                            <td><?php echo ($test['number']) ?></td>
-                            <td><?php echo ($test['name']); ?></td>
+                        <tr>
+                            <td><?php echo ($student['id']); ?></td>
+                            <td><?php echo ($student['year']); ?></td>
+                            <td><?php echo ($student['class']) ?></td>
+                            <td><?php echo ($student['number']) ?></td>
+                            <td><?php echo ($student['name']); ?></td>
                             <td><a href="edit.php?id=<?php print($test['id']); ?>" class="btn btn-primary">変更</a></td>
                         </tr>
 
-                    <?php endwhile; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         <?php else : ?>
