@@ -1,4 +1,3 @@
-
 <?php
 try {
     $db = new PDO('mysql:dbname=grademanagement; host=127.0.0.1; charset=utf8', 'root', '');
