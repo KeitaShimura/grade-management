@@ -24,7 +24,7 @@ $_SESSION['token'] = $token;
 
 <body>
     <h1>テスト登録画面</h1>
-    <form method="POST" action="save.php">
+    <form method="POST" action="update.php">
         <input type="hidden" name="id" value="<?php print($test['id']); ?>">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token, ENT_COMPAT, 'UTF-8'); ?>">
         <input type="number" min="1" max="10" class="form-control" id="year" name="year" value="<?php echo $test['year'] ?>">
