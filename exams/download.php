@@ -7,16 +7,13 @@ try {
 
 $exams = $db->query("SELECT exams.id, tests.name AS test_name, students.name AS student_name, exams.kokugo, exams.sugaku, exams.eigo, exams.rika, exams.shakai, exams.goukei FROM exams INNER JOIN students ON exams.student_id = students.id INNER JOIN tests ON exams.test_id = tests.id");
 
+$csv = 'ID, テスト, 名前, 国語, 数学, 英語, 理科, 社会, 合計';
 
 if (isset($_POST['csvoutput'])) {
 
     $now = new DateTime();
+    $fileName = 'exams-'.$now->format('Ymd').".csv";
 
-    $csvfilename = "";
-    $csvfilename .= 'test-';
-    $csvfilename .= $now->format('Ymd');
-
-    $fileName = $csvfilename . ".csv";
     $csvstr = "";
 
     header("Content-Type: application/octet-stream");
