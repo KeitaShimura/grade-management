@@ -49,7 +49,7 @@ $students = $db->query('SELECT * FROM students');
                             <td><?php echo ($student['class']) ?></td>
                             <td><?php echo ($student['number']) ?></td>
                             <td><?php echo ($student['name']); ?></td>
-                            <td><a href="edit.php?id=<?php print($test['id']); ?>" class="btn btn-primary">変更</a></td>
+                            <td><a href="edit.php?id=<?php echo $student['id']; ?>" class="btn btn-primary">変更</a></td>
                         </tr>
 
                     <?php endforeach; ?>

@@ -6,10 +6,11 @@ try {
 }
 
 $student = $db->prepare("INSERT INTO students (year, class, number, name, created_at, updated_at) VALUES(:year, :class, :number, :name, NOW(), NOW())");
+$name = htmlspecialchars(trim($_POST['name']), ENT_QUOTES);
 $student->bindParam(":year", $_POST['year']);
 $student->bindParam(":class", $_POST['class']);
 $student->bindParam(":number", $_POST['number']);
-$student->bindParam(":name", $_POST['name']);
+$student->bindParam(":name", $name);
 $student->execute();
 
 return header("Location: index.php");
