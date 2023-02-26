@@ -16,13 +16,13 @@ $tests = $db->query('SELECT * FROM tests');
 </head>
 
 <body>
-<?php if (isset($_SESSION['status'])) : ?>
-            <div class="alert alert-danger" role="alert">
-                <?php echo $_SESSION['status'];
-                unset($_SESSION['status']); ?>
-            </div>
+    <?php if (isset($_SESSION['status'])) : ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $_SESSION['status'];
+            unset($_SESSION['status']); ?>
+        </div>
 
-        <?php endif; ?>
+    <?php endif; ?>
     <article>
         <?php if ($tests) : ?>
             <table>
@@ -38,9 +38,10 @@ $tests = $db->query('SELECT * FROM tests');
                     <?php while ($test = $tests->fetch()) : ?>
 
                         <tr id="tr<?php echo ($test['id']); ?>">
+                            <td><?php echo ($test['id']) ?></td>
                             <td><?php echo ($test['year']); ?></td>
                             <td><?php echo ($test['name']); ?></td>
-                            <td id="delete_button"><a href="edit.php?id=<?php print($test['id']); ?>">削除</a></td>
+                            <td><a href="edit.php?id=<?php print($test['id']); ?>" class="btn btn-primary">削除</a></td>
                         </tr>
 
                     <?php endwhile; ?>

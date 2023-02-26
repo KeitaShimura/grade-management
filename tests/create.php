@@ -21,23 +21,18 @@ $_SESSION['token'] = $token;
     <h1>テスト登録画面</h1>
     <form method="POST" action="save.php">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token, ENT_COMPAT, 'UTF-8'); ?>">
+        <input type="number" min="1" max="10" class="form-control" id="year" name="year" placeholder="">
+        <select name="name">
+            <option type="hidden">テストを選択</option>
+            <option>前期中間テスト</option>
+            <option>前期期末テスト</option>
+            <option>後期中間テスト</option>
+            <option>後期期末テスト</option>
+        </select>
         <div>
-            <div class="mb-3">
-                <input type="number" min="1" max="10" class="form-control" id="year" name="year" placeholder="">
-            </div>
-            <div class="mb-3">
-                <select name="name">
-                    <option hidden>テストを選択</option>
-                    <option>前期中間テスト</option>
-                    <option>前期期末テスト</option>
-                    <option>後期中間テスト</option>
-                    <option>後期期末テスト</option>
-                </select>
-            </div>
-            <div>
-                <input type="submit" class="btn btn-success" value="送信">
-                <input type="reset" class="btn btn-danger" value="リセット">
-            </div>
+            <input type="submit" class="btn btn-success" value="送信">
+            <input type="reset" class="btn btn-danger" value="リセット">
+        </div>
     </form>
 </body>
 

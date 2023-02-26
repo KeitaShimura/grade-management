@@ -6,5 +6,4 @@ $statement->bindParam(":year", $_POST['year']);
 $statement->bindParam(":name", $_POST['name']);
 $statement->execute();
 
-$_SESSION['status'] = "テスト結果を登録しました。";
-return header("Location: index.gitphp");
+return header("Location: index.php");
