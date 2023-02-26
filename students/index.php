@@ -27,6 +27,13 @@ $students = $db->query('SELECT * FROM students');
         </div>
 
     <?php endif; ?>
+    <a href="../exams/index.php">テスト結果一覧</a>
+    <a href="../exams/result.php">成績一覧</a>
+    <a href="../exams/create.php">テスト結果作成</a>
+    <a href="../tests/index.php">テスト一覧</a>
+    <a href="../tests/create.php">テスト結果</a>
+    <a href="index.php">生徒一覧</a>
+    <a href="create.php">生徒結果</a>
     <article>
         <?php if ($students) : ?>
             <table>

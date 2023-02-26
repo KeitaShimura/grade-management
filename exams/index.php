@@ -22,6 +22,14 @@ $exams = $db->query("SELECT exams.id, tests.name AS test_name, students.name AS 
 
 <body>
     <h1>テスト一覧画面</h1>
+    <a href="index.php">テスト結果一覧</a>
+    <a href="result.php">成績一覧</a>
+    <a href="create.php">テスト結果作成</a>
+    <a href="../tests/index.php">テスト一覧</a>
+    <a href="../tests/create.php">テスト結果</a>
+    <a href="../students/index.php">生徒一覧</a>
+    <a href="../students/create.php">生徒結果</a>
+
     <form action="download.php" method="post">
         <button name="csvoutput" type="submit">CSV ダウンロード</button>
     </form>

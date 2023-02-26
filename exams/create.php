@@ -39,6 +39,13 @@ $_SESSION['token'] = $token;
 
 <body>
     <h1>生徒登録画面</h1>
+    <a href="index.php">テスト結果一覧</a>
+    <a href="result.php">成績一覧</a>
+    <a href="create.php">テスト結果作成</a>
+    <a href="../tests/index.php">テスト一覧</a>
+    <a href="../tests/create.php">テスト結果</a>
+    <a href="../students/index.php">生徒一覧</a>
+    <a href="../students/create.php">生徒結果</a>
     <form method="POST" action="save.php">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token, ENT_COMPAT, 'UTF-8'); ?>">
 
@@ -80,6 +87,7 @@ $_SESSION['token'] = $token;
             </div>
         </div>
     </form>
+    <a href="index.php">戻る</a>
 </body>
 
 <script type="text/javascript">
