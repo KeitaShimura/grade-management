@@ -24,6 +24,17 @@ $_SESSION['token'] = $token;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODO</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
 </head>
 
 <body>
@@ -31,10 +42,10 @@ $_SESSION['token'] = $token;
     <form method="POST" action="update.php">
         <input type="hidden" name="id" value="<?php echo $student['id']; ?>">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token, ENT_COMPAT, 'UTF-8'); ?>">
-        <input type="number" min="1" max="3" name="year" value="<?php echo $student['year'] ?>">
-        <input type="number" min="1" max="10" name="class" value="<?php echo $student['class'] ?>">
-        <input type="number" min="1" max="10" name="number" value="<?php echo $student['number'] ?>">
-        <input type="text" name="name" value="<?php echo $student['name'] ?>">
+        <input required type="number" min="1" max="3" name="year" value="<?php echo $student['year'] ?>">
+        <input required type="number" min="1" max="10" name="class" value="<?php echo $student['class'] ?>">
+        <input required type="number" min="1" max="10" name="number" value="<?php echo $student['number'] ?>">
+        <input required type="text" name="name" value="<?php echo $student['name'] ?>">
 
         <div>
             <input type="submit" class="btn btn-success" value="送信">

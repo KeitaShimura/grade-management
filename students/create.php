@@ -20,16 +20,27 @@ $_SESSION['token'] = $token;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODO</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
 </head>
 
 <body>
     <h1>テスト登録画面</h1>
     <form method="POST" action="save.php">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token, ENT_COMPAT, 'UTF-8'); ?>">
-        <input type="number" min="1" max="3" name="year" placeholder="学年">
-        <input type="number" min="1" max="10" name="class" placeholder="クラス">
-        <input type="number" min="1" max="10" name="number" placeholder="学年">
-        <input type="text" name="name" placeholder="名前">
+        <input required type="number" min="1" max="3" name="year" placeholder="学年">
+        <input required type="number" min="1" max="10" name="class" placeholder="クラス">
+        <input required type="number" min="1" max="10" name="number" placeholder="学年">
+        <input required type="text" name="name" placeholder="名前">
         <div>
             <input type="submit" class="btn btn-success" value="送信">
             <input type="reset" class="btn btn-danger" value="リセット">

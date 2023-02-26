@@ -24,6 +24,17 @@ $_SESSION['token'] = $token;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODO</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
 </head>
 
 <body>
@@ -38,13 +49,13 @@ $_SESSION['token'] = $token;
             </div>
 
         <?php endif; ?>
-        <select name="test_id">
+        <select required name="test_id">
             <option type="hidden">テスト</option>
             <?php foreach ($tests as $test) : ?>
                 <option value="<?php echo $test['id']?>"><?php echo $test['year']; ?>年 / <?php echo $test['name'] ?></option>
             <?php endforeach; ?>
         </select>
-        <select name="student_id">
+        <select required name="student_id">
             <option type="hidden">生徒</option>
             <?php foreach ($students as $student) : ?>
                 <option value="<?php echo $student['id']?>"><?php echo $student['year']; ?>年 / <?php echo $student['class']; ?>組 / <?php echo $student['number']; ?>番 / <?php echo $student['name'] ?></option>
@@ -52,17 +63,17 @@ $_SESSION['token'] = $token;
         </select>
         <div class="form" style="text-align: center;">
             <label>国語</label>
-            <input type="number" min="0" max="100" name="kokugo" id="kokugo">
+            <input required type="number" min="0" max="100" name="kokugo" id="kokugo">
             <label>数学</label>
-            <input type="number" min="0" max="100" name="sugaku" id="sugaku">
+            <input required type="number" min="0" max="100" name="sugaku" id="sugaku">
             <label>英語</label>
-            <input type="number" min="0" max="100" name="eigo" id="eigo">
+            <input required type="number" min="0" max="100" name="eigo" id="eigo">
             <label>理科</label>
-            <input type="number" min="0" max="100" name="rika" id="rika">
+            <input required type="number" min="0" max="100" name="rika" id="rika">
             <label>社会</label>
-            <input type="number" min="0" max="100" name="shakai" id="shakai">
+            <input required type="number" min="0" max="100" name="shakai" id="shakai">
             <label>合計</label>
-            <input readonly type="number" min="0" max="100" name="goukei" id="goukei">
+            <input required readonly type="number" min="0" max="100" name="goukei" id="goukei">
             <div>
                 <input type="submit" class="btn btn-success" value="送信">
                 <input type="reset" class="btn btn-danger" value="リセット">
