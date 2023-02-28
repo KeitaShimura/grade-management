@@ -6,8 +6,9 @@ try {
 }
 
 $exams = $db->query("SELECT exams.id, tests.name AS test_name, students.name AS student_name, exams.kokugo, exams.sugaku, exams.eigo, exams.rika, exams.shakai, exams.goukei FROM exams INNER JOIN students ON exams.student_id = students.id INNER JOIN tests ON exams.test_id = tests.id");
-$exams->execute();
-$exams->fetchAll();
+
+
+session_start();
 
 ?>
 
@@ -23,14 +24,14 @@ $exams->fetchAll();
 </head>
 
 <body>
-    <h1>テスト一覧画面</h1>
+    <h1>テスト結果一覧</h1>
     <a href="index.php">テスト結果一覧</a>
-    <a href="result.php">成績一覧</a>
+    <a href="result.php">学期別テスト結果一覧</a>
     <a href="create.php">テスト結果作成</a>
     <a href="../tests/index.php">テスト一覧</a>
-    <a href="../tests/create.php">テスト結果</a>
+    <a href="../tests/create.php">テスト作成</a>
     <a href="../students/index.php">生徒一覧</a>
-    <a href="../students/create.php">生徒結果</a>
+    <a href="../students/create.php">生徒作成</a>
 
     <form action="download.php" method="post">
         <button name="csvoutput" type="submit">CSV ダウンロード</button>

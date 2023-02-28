@@ -34,20 +34,31 @@ $_SESSION['token'] = $token;
 </head>
 
 <body>
-    <h1>テスト登録画面</h1>
+    <h1>生徒登録</h1>
+    
     <a href="../exams/index.php">テスト結果一覧</a>
-    <a href="../exams/result.php">成績一覧</a>
+    <a href="../exams/result.php">学期別テスト結果一覧</a>
     <a href="../exams/create.php">テスト結果作成</a>
     <a href="../tests/index.php">テスト一覧</a>
-    <a href="../tests/create.php">テスト結果</a>
-    <a href="sindex.php">生徒一覧</a>
-    <a href="create.php">生徒結果</a>
+    <a href="../tests/create.php">テスト作成</a>
+    <a href="index.php">生徒一覧</a>
+    <a href="create.php">生徒作成</a>
+
     <form method="POST" action="save.php">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token, ENT_COMPAT, 'UTF-8'); ?>">
-        <input required type="number" min="1" max="3" name="year" placeholder="学年">
-        <input required type="number" min="1" max="10" name="class" placeholder="クラス">
-        <input required type="number" min="1" max="10" name="number" placeholder="学年">
-        <input required type="text" name="name" placeholder="名前">
+        <p>学年</p>
+        <select required name="year">
+            <option type="hidden"><?php if(isset($_POST['year'])){ echo $_POST['year'];} ?></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select> 
+        <p>クラス</p>
+        <input required type="number" min="1" max="10" name="class" value="<?php if(isset($_POST['class'])){ echo $_POST['class'];} ?>">
+        <p>学年</p>
+        <input required type="number" min="1" max="10" name="number" value="<?php if(isset($_POST['number'])){ echo $_POST['number'];} ?>">
+        <p>氏名</p>
+        <input required type="text" name="name" value="<?php if(isset($_POST['name'])){ echo $_POST['name'];} ?>">
         <div>
             <input type="submit" class="btn btn-success" value="送信">
             <input type="reset" class="btn btn-danger" value="リセット">

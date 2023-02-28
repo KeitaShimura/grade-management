@@ -58,14 +58,16 @@ if (isset($_GET['sort'])) {
 </head>
 
 <body>
-    <h1 class="fs-1" style="margin: 50px 0 0 40px;">テスト一覧画面</h1>
+    <h1 class="fs-1" style="margin: 50px 0 0 40px;">学期別テスト結果一覧</h1>
+    
     <a href="index.php">テスト結果一覧</a>
-    <a href="result.php">成績一覧</a>
+    <a href="result.php">学期別テスト結果一覧</a>
     <a href="create.php">テスト結果作成</a>
     <a href="../tests/index.php">テスト一覧</a>
-    <a href="../tests/create.php">テスト結果</a>
+    <a href="../tests/create.php">テスト作成</a>
     <a href="../students/index.php">生徒一覧</a>
-    <a href="../students/create.php">生徒結果</a>
+    <a href="../students/create.php">生徒作成</a>
+
     <ul class="nav justify-content-center">
         <?php foreach ($tests as $test) { ?>
             <a href="result.php?test_name=<?php echo $test['name']; ?>"><?php echo $test['name']; ?></a>&ensp;

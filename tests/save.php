@@ -7,19 +7,9 @@ try {
 
 session_start();
 
-$error = [];
-
-if ($_POST['year'] === "学年を選択") {
-    $error[] = "学年を選択してください。";
-}
-
-if ($_POST['name'] === "テストを選択") {
-    $error[] = "テストを選択してください。";
-}
-
-if (count($error) > 0) {
-    $_SESSION['status'] = $error;
-    return header("Location: create.php", true, 307);
+$token = filter_input(INPUT_POST, 'token');
+if (empty($_SESSION['token']) || $token !== $_SESSION['token']) {
+    die('投稿失敗');
 } else {
     unset($_SESSION['status']);
 

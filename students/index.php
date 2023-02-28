@@ -6,6 +6,7 @@ try {
 }
 
 $students = $db->query('SELECT * FROM students');
+session_start();
 
 ?>
 
@@ -20,6 +21,7 @@ $students = $db->query('SELECT * FROM students');
 </head>
 
 <body>
+    <P>生徒一覧<p>
     <?php if (isset($_SESSION['status'])) : ?>
         <div class="alert alert-danger" role="alert">
             <?php echo $_SESSION['status'];
@@ -28,12 +30,12 @@ $students = $db->query('SELECT * FROM students');
 
     <?php endif; ?>
     <a href="../exams/index.php">テスト結果一覧</a>
-    <a href="../exams/result.php">成績一覧</a>
+    <a href="../exams/result.php">学期別テスト結果一覧</a>
     <a href="../exams/create.php">テスト結果作成</a>
     <a href="../tests/index.php">テスト一覧</a>
-    <a href="../tests/create.php">テスト結果</a>
+    <a href="../tests/create.php">テスト作成</a>
     <a href="index.php">生徒一覧</a>
-    <a href="create.php">生徒結果</a>
+    <a href="create.php">生徒作成</a>
     <article>
         <table>
             <thead>

@@ -38,34 +38,28 @@ $_SESSION['token'] = $token;
 </head>
 
 <body>
-    <h1>生徒登録画面</h1>
+    <h1>テスト結果登録</h1>
     <a href="index.php">テスト結果一覧</a>
-    <a href="result.php">成績一覧</a>
+    <a href="result.php">学期別テスト結果一覧</a>
     <a href="create.php">テスト結果作成</a>
     <a href="../tests/index.php">テスト一覧</a>
-    <a href="../tests/create.php">テスト結果</a>
+    <a href="../tests/create.php">テスト作成</a>
     <a href="../students/index.php">生徒一覧</a>
-    <a href="../students/create.php">生徒結果</a>
+    <a href="../students/create.php">生徒作成</a>
     <form method="POST" action="save.php">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token, ENT_COMPAT, 'UTF-8'); ?>">
-
-        <?php if (isset($_SESSION['status'])) : ?>
-            <div class="alert alert-danger" role="alert">
-                <?php echo $_SESSION['status'];
-                unset($_SESSION['status']); ?>
-            </div>
-
-        <?php endif; ?>
+        <p>テスト</p>
         <select required name="test_id">
-            <option type="hidden">テスト</option>
+            <option type="hidden"></option>
             <?php foreach ($tests as $test) : ?>
-                <option value="<?php echo $test['id']?>"><?php echo $test['year']; ?>年 / <?php echo $test['name'] ?></option>
+                <option value="<?php echo $test['id'] ?>"><?php echo $test['year']; ?>年 / <?php echo $test['name'] ?></option>
             <?php endforeach; ?>
         </select>
+        <p>生徒</p>
         <select required name="student_id">
-            <option type="hidden">生徒</option>
+            <option type="hidden"></option>
             <?php foreach ($students as $student) : ?>
-                <option value="<?php echo $student['id']?>"><?php echo $student['year']; ?>年 / <?php echo $student['class']; ?>組 / <?php echo $student['number']; ?>番 / <?php echo $student['name'] ?></option>
+                <option value="<?php echo $student['id'] ?>"><?php echo $student['year']; ?>年 / <?php echo $student['class']; ?>組 / <?php echo $student['number']; ?>番 / <?php echo $student['name'] ?></option>
             <?php endforeach; ?>
         </select>
         <div class="form" style="text-align: center;">

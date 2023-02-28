@@ -33,32 +33,28 @@ $_SESSION['token'] = $token;
 </head>
 
 <body>
-    <h1>テスト登録画面</h1>
-    <?php if (isset($_SESSION['status'])) : ?>
-        <?php foreach ($_SESSION['status'] as $error) : ?>
-            <div class="alert alert-danger" role="alert">
-                <?php echo $error;
-                unset($_SESSION['status']); ?>
-            </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
-    <a href="../exams/index.php">テスト結果一覧</a>
-    <a href="../exams/result.php">成績一覧</a>
+    <h1>テスト登録</h1>
+    
+    <<a href="../exams/index.php">テスト結果一覧</a>
+    <a href="../exams/result.php">学期別テスト結果一覧</a>
     <a href="../exams/create.php">テスト結果作成</a>
     <a href="index.php">テスト一覧</a>
-    <a href="create.php">テスト結果</a>
+    <a href="create.php">テスト作成</a>
     <a href="../students/index.php">生徒一覧</a>
-    <a href="../students/create.php">生徒結果</a>
+    <a href="../students/create.php">生徒作成</a>
+
     <form method="POST" action="save.php">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token, ENT_COMPAT, 'UTF-8'); ?>">
+        <p>学年</p>
         <select required name="year">
-            <option type="hidden">学年を選択</option>
+            <option type="hidden"><?php if(isset($_POST['year'])){ echo $_POST['year'];} ?></option>
             <option>1</option>
             <option>2</option>
             <option>3</option>
         </select>
+        <p>テスト</p>
         <select required name="name">
-            <option type="hidden">テストを選択</option>
+            <option type="hidden"><?php if(isset($_POST['name'])){ echo $_POST['name'];} ?></option>
             <option>前期中間テスト</option>
             <option>前期期末テスト</option>
             <option>後期中間テスト</option>
