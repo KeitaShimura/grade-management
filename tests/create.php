@@ -34,6 +34,14 @@ $_SESSION['token'] = $token;
 
 <body>
     <h1>テスト登録画面</h1>
+    <?php if (isset($_SESSION['status'])) : ?>
+        <?php foreach ($_SESSION['status'] as $error) : ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo $error;
+                unset($_SESSION['status']); ?>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
     <a href="../exams/index.php">テスト結果一覧</a>
     <a href="../exams/result.php">成績一覧</a>
     <a href="../exams/create.php">テスト結果作成</a>
@@ -43,7 +51,12 @@ $_SESSION['token'] = $token;
     <a href="../students/create.php">生徒結果</a>
     <form method="POST" action="save.php">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token, ENT_COMPAT, 'UTF-8'); ?>">
-        <input required type="number" min="1" max="3" class="form-control" id="year" name="year" placeholder="">
+        <select required name="year">
+            <option type="hidden">学年を選択</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
         <select required name="name">
             <option type="hidden">テストを選択</option>
             <option>前期中間テスト</option>

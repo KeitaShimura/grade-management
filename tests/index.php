@@ -7,6 +7,10 @@ try {
 
 $tests = $db->query('SELECT * FROM tests');
 
+session_start();
+
+$token = bin2hex(openssl_random_pseudo_bytes(24));
+$_SESSION['token'] = $token;
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +29,6 @@ $tests = $db->query('SELECT * FROM tests');
             <?php echo $_SESSION['status'];
             unset($_SESSION['status']); ?>
         </div>
-
     <?php endif; ?>
 
     <a href="../exams/index.php">テスト結果一覧</a>
