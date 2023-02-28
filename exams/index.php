@@ -6,6 +6,8 @@ try {
 }
 
 $exams = $db->query("SELECT exams.id, tests.name AS test_name, students.name AS student_name, exams.kokugo, exams.sugaku, exams.eigo, exams.rika, exams.shakai, exams.goukei FROM exams INNER JOIN students ON exams.student_id = students.id INNER JOIN tests ON exams.test_id = tests.id");
+$exams->execute();
+$exams->fetchAll();
 
 ?>
 
@@ -41,43 +43,39 @@ $exams = $db->query("SELECT exams.id, tests.name AS test_name, students.name AS 
 
     <?php endif; ?>
     <article>
-        <?php if ($exams) : ?>
-            <table>
-                <thead>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>テスト</th>
+                    <th>名前</th>
+                    <th>国語</th>
+                    <th>数学</th>
+                    <th>英語</th>
+                    <th>理科</th>
+                    <th>社会</th>
+                    <th>合計</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php foreach ($exams as $exam) : ?>
                     <tr>
-                        <th>ID</th>
-                        <th>テスト</th>
-                        <th>名前</th>
-                        <th>国語</th>
-                        <th>数学</th>
-                        <th>英語</th>
-                        <th>理科</th>
-                        <th>社会</th>
-                        <th>合計</th>
+                        <td><?php echo $exam['id']; ?></td>
+                        <td><?php echo $exam['test_name']; ?></td>
+                        <td><?php echo $exam['student_name']; ?></td>
+                        <td><?php echo $exam['kokugo']; ?></td>
+                        <td><?php echo $exam['sugaku']; ?></td>
+                        <td><?php echo $exam['eigo']; ?></td>
+                        <td><?php echo $exam['rika']; ?></td>
+                        <td><?php echo $exam['shakai']; ?></td>
+                        <td><?php echo $exam['goukei']; ?></td>
                     </tr>
-                </thead>
+                <?php endforeach; ?>
 
-                <tbody>
-                    <?php foreach ($exams as $exam) : ?>
-                        <tr>
-                            <td><?php echo $exam['id']; ?></td>
-                            <td><?php echo $exam['test_name']; ?></td>
-                            <td><?php echo $exam['student_name']; ?></td>
-                            <td><?php echo $exam['kokugo']; ?></td>
-                            <td><?php echo $exam['sugaku']; ?></td>
-                            <td><?php echo $exam['eigo']; ?></td>
-                            <td><?php echo $exam['rika']; ?></td>
-                            <td><?php echo $exam['shakai']; ?></td>
-                            <td><?php echo $exam['goukei']; ?></td>
-                        </tr>
-                    <?php endforeach; ?>
+            </tbody>
 
-                </tbody>
-
-            </table>
-        <?php else : ?>
-            <h3 class="fs-3" style="text-align: center; margin: 50px 0 0 0;">テストは登録されていません</h3>
-        <?php endif; ?>
+        </table>
     </article>
 </body>
 

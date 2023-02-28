@@ -35,36 +35,32 @@ $students = $db->query('SELECT * FROM students');
     <a href="index.php">生徒一覧</a>
     <a href="create.php">生徒結果</a>
     <article>
-        <?php if ($students) : ?>
-            <table>
-                <thead>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>学年</th>
+                    <th>クラス</th>
+                    <th>学生番号</th>
+                    <th>氏名</th>
+                    <th>編集</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($students as $student) : ?>
+
                     <tr>
-                        <th>ID</th>
-                        <th>学年</th>
-                        <th>クラス</th>
-                        <th>学生番号</th>
-                        <th>氏名</th>
-                        <th>編集</th>
+                        <td><?php echo ($student['id']); ?></td>
+                        <td><?php echo ($student['year']); ?></td>
+                        <td><?php echo ($student['class']) ?></td>
+                        <td><?php echo ($student['number']) ?></td>
+                        <td><?php echo ($student['name']); ?></td>
+                        <td><a href="edit.php?id=<?php echo $student['id']; ?>" class="btn btn-primary">変更</a></td>
                     </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($students as $student) : ?>
 
-                        <tr>
-                            <td><?php echo ($student['id']); ?></td>
-                            <td><?php echo ($student['year']); ?></td>
-                            <td><?php echo ($student['class']) ?></td>
-                            <td><?php echo ($student['number']) ?></td>
-                            <td><?php echo ($student['name']); ?></td>
-                            <td><a href="edit.php?id=<?php echo $student['id']; ?>" class="btn btn-primary">変更</a></td>
-                        </tr>
-
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php else : ?>
-            <p>テストはありません</p>
-        <?php endif; ?>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </article>
 </body>
 
