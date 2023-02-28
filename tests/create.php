@@ -17,7 +17,7 @@ $_SESSION['token'] = $token;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TODO</title>
+    <title>成績管理 - テスト登録 - </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         input[type="number"]::-webkit-outer-spin-button,
@@ -34,14 +34,14 @@ $_SESSION['token'] = $token;
 
 <body>
     <h1>テスト登録</h1>
-    
+
     <<a href="../exams/index.php">テスト結果一覧</a>
     <a href="../exams/result.php">学期別テスト結果一覧</a>
-    <a href="../exams/create.php">テスト結果作成</a>
+    <a href="../exams/create.php">テスト結果登録</a>
     <a href="index.php">テスト一覧</a>
-    <a href="create.php">テスト作成</a>
+    <a href="create.php">テスト登録</a>
     <a href="../students/index.php">生徒一覧</a>
-    <a href="../students/create.php">生徒作成</a>
+    <a href="../students/create.php">生徒登録</a>
 
     <form method="POST" action="save.php">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token, ENT_COMPAT, 'UTF-8'); ?>">

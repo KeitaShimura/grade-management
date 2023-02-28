@@ -8,6 +8,7 @@ try {
 session_start();
 
 $token = filter_input(INPUT_POST, 'token');
+
 if (empty($_SESSION['token']) || $token !== $_SESSION['token']) {
     die('投稿失敗');
 } else {
@@ -20,6 +21,6 @@ if (empty($_SESSION['token']) || $token !== $_SESSION['token']) {
 
     $test->execute();
     $test->fetch();
-    $_SESSION['status'] = "テストを更新しました。";
+    $_SESSION['status'] = "テストを変更しました。";
     return header("Location: index.php");
 }
