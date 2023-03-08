@@ -55,6 +55,6 @@ CREATE TABLE IF NOT EXISTS grademanagement.teacher_classes (
     updated_at DATETIME
 );
 
-INSERT INTO grademanagement.teachers SET id=1, email="keitashimura2023@gmail.com", password="111111", name="志村 啓太", position="一般", created_at="2020-10-10", updated_at="2020-10-10";
+INSERT INTO grademanagement.teachers SET id=1, email="keitashimura2023@gmail.com", password=SHA1("111111"), name="志村 啓太", position="一般", created_at="2020-10-10", updated_at="2020-10-10";
 INSERT INTO grademanagement.classes SET id=1, year=1, name="志村 啓太", created_at="2020-10-10", updated_at="2020-10-10";
 INSERT INTO grademanagement.teacher_classes SET id=1, teacher_id=1, class_id=1, created_at="2020-10-10", updated_at="2020-10-10";
