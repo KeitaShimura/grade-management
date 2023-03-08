@@ -22,6 +22,8 @@ if (!empty($_POST)) {
 
         if ($teacher) {
             $_SESSION['id'] = $teacher['id'];
+            $_SESSION['name'] = $teacher['name'];
+            $_SESSION['login_time'] = date('y年m月d日 H時i分', time());
             $_SESSION['time'] = time();
 
             if ($_POST['save'] == 'on') {
