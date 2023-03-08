@@ -1,11 +1,10 @@
 <?php
-require_once(__DIR__ .'../func/db_connect.php');
+require_once(__DIR__ . '/../components/header.php');
 
 $tests = $db->prepare("SELECT * FROM tests WHERE id = ?");
 $tests->execute(array($_REQUEST['id']));
 $test = $tests->fetch();
 
-session_start();
 
 $token = bin2hex(openssl_random_pseudo_bytes(24));
 $_SESSION['token'] = $token;

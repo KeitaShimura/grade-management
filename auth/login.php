@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . '/../func/db_connect.php');
+
 session_start();
 $error=null;
 
@@ -31,7 +32,7 @@ if (!empty($_POST)) {
                 setcookie('password', $_POST['password'], time() + 60 * 60 * 24 * 14);
             }
 
-            header('Location: ../index.php');
+            header('Location: http://localhost/grade-management');
             exit();
         } else {
             $error['login'] = 'failed';

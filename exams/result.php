@@ -1,6 +1,5 @@
 <?php
-require_once(__DIR__ .'../func/db_connect.php');
-
+require_once(__DIR__ . '/../components/header.php');
 
 if (isset($_GET['test_name'])) {
     $exams = $db->prepare("SELECT students.number as student_number, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id WHERE tests.name = ?");

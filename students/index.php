@@ -1,8 +1,8 @@
 <?php
-require_once(__DIR__ .'../func/db_connect.php');
+require_once(__DIR__ . '/../components/header.php');
+
 
 $students = $db->query('SELECT * FROM students');
-session_start();
 
 ?>
 

@@ -1,10 +1,9 @@
 <?php
 
-require_once(__DIR__ .'../func/db_connect.php');
+require_once(__DIR__ . '/../components/header.php');
+
 $tests = $db->query('SELECT * FROM tests');
 $students = $db->query('SELECT * FROM students');
-
-session_start();
 
 $token = bin2hex(openssl_random_pseudo_bytes(24));
 $_SESSION['token'] = $token;
