@@ -1,9 +1,6 @@
 <?php
-try {
-    $db = new PDO('mysql:dbname=grademanagement; host=127.0.0.1; charset=utf8', 'root', '');
-} catch (PDOException $e) {
-    echo 'DB接続エラー:' . $e->getMessage();
-}
+require_once(__DIR__ .'../func/db_connect.php');
+
 
 $exams = $db->query("SELECT exams.id, tests.name AS test_name, students.name AS student_name, exams.kokugo, exams.sugaku, exams.eigo, exams.rika, exams.shakai, exams.goukei FROM exams INNER JOIN students ON exams.student_id = students.id INNER JOIN tests ON exams.test_id = tests.id");
 
