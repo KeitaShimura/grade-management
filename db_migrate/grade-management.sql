@@ -14,7 +14,9 @@ CREATE TABLE IF NOT EXISTS grademanagement.exams (
 
 CREATE TABLE IF NOT EXISTS grademanagement.students (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    class_id INT(11) NOT NULL,
+    name varchar(30) NOT NULL,
+    year INT(11) NOT NULL,
+    -- class_id INT(11) NOT NULL,
     class INT(11) NOT NULL,
     number INT(11) NOT NULL,
     created_at DATETIME,

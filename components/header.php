@@ -42,7 +42,7 @@ require_once(__DIR__ . '/../auth/login_check.php');
 
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" tabindex="-1">   ログインユーザー<?php echo $_SESSION['name'];?> /<?php echo $_SESSION['login_time'];?></a>
+                        <a class="nav-link" href="#" tabindex="-1"><?php echo $_SESSION['name'];?> /<?php echo $_SESSION['login_time'];?></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://localhost/grade-management/auth/logout.php">ログアウト</a>
