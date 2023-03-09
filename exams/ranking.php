@@ -4,30 +4,29 @@ require_once(__DIR__ . '/../components/header.php');
 $tests = $db->query("SELECT year, name FROM tests");
 $tests = $tests->fetchAll();
 
-$exams = $db->prepare("SELECT tests.name as test_name, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id WHERE tests.name = ? AND tests.year = ? ORDER BY goukei DESC");
+$exams = $db->prepare("SELECT tests.name as test_name, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id WHERE tests.name = ? AND tests.year = ? ORDER BY goukei DESC LIMIT 5");
 $exams->execute(array($_GET['test_name'], $_GET['year']));
 $exams = $exams->fetchAll();
 
-$kokugo = $db->prepare("SELECT tests.name as test_name, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id WHERE tests.name = ? AND tests.year = ? ORDER BY kokugo DESC");
+$kokugo = $db->prepare("SELECT tests.name as test_name, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id WHERE tests.name = ? AND tests.year = ? ORDER BY kokugo DESC LIMIT 5");
 $kokugo->execute(array($_GET['test_name'], $_GET['year']));
 $kokugo = $kokugo->fetchAll();
 
-$sugaku = $db->prepare("SELECT tests.name as test_name, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id WHERE tests.name = ? AND tests.year = ? ORDER BY sugaku DESC");
+$sugaku = $db->prepare("SELECT tests.name as test_name, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id WHERE tests.name = ? AND tests.year = ? ORDER BY sugaku DESC LIMIT 5");
 $sugaku->execute(array($_GET['test_name'], $_GET['year']));
 $sugaku = $sugaku->fetchAll();
 
-$eigo = $db->prepare("SELECT tests.name as test_name, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id WHERE tests.name = ? AND tests.year = ? ORDER BY eigo DESC");
+$eigo = $db->prepare("SELECT tests.name as test_name, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id WHERE tests.name = ? AND tests.year = ? ORDER BY eigo DESC LIMIT 5");
 $eigo->execute(array($_GET['test_name'], $_GET['year']));
 $eigo = $eigo->fetchAll();
 
-$rika = $db->prepare("SELECT tests.name as test_name, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id WHERE tests.name = ? AND tests.year = ? ORDER BY rika DESC");
+$rika = $db->prepare("SELECT tests.name as test_name, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id WHERE tests.name = ? AND tests.year = ? ORDER BY rika DESC LIMIT 5");
 $rika->execute(array($_GET['test_name'], $_GET['year']));
 $rika = $rika->fetchAll();
 
-$shakai = $db->prepare("SELECT tests.name as test_name, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id WHERE tests.name = ? AND tests.year = ? ORDER BY shakai DESC");
+$shakai = $db->prepare("SELECT tests.name as test_name, students.name as student_name, kokugo, sugaku, eigo, rika, shakai, goukei FROM exams INNER JOIN tests ON exams.test_id = tests.id INNER JOIN students ON exams.student_id = students.id WHERE tests.name = ? AND tests.year = ? ORDER BY shakai DESC LIMIT 5");
 $shakai->execute(array($_GET['test_name'], $_GET['year']));
 $shakai = $shakai->fetchAll();
-
 
 ?>
 <h1>テストランキング</h1>
@@ -40,8 +39,15 @@ $shakai = $shakai->fetchAll();
 <div>
     <h2>学年ランキング</h2>
     <?php foreach ($tests as $test) { ?>
-        <a href="ranking.php?test_name=<?php echo $test['name']; ?>&year=<?php echo $test['year']; ?>"><?php echo $test['year']; ?>年生/ <?php echo $test['name']; ?></a>&ensp;
+        <a href="ranking.php?test_name=<?php echo $test['name']; ?>"><?php echo $test['name']; ?></a>&ensp;
     <?php } ?>
+</div>
+
+<div>
+    <h2>学年ランキング</h2>
+    <a href="ranking.php?test_name=<?php echo $test['name']; ?>&year=1">1年生</a>
+    <a href="ranking.php?test_name=<?php echo $test['name']; ?>&year=2">2年生</a>
+    <a href="ranking.php?test_name=<?php echo $test['name']; ?>&year=3">3年生</a>
 </div>
 
 <p>テスト種類:<?php echo htmlspecialchars($_GET['year']); ?> 年<?php echo htmlspecialchars($_GET['test_name']); ?> </p>
