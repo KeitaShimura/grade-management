@@ -26,7 +26,6 @@ if (isset($_GET['test_name'])) {
 $tests = $db->query("SELECT DISTINCT name FROM tests");
 
 
-
 if (isset($_GET['sort'])) {
     if ($_GET['sort'] == 'student_number') {
         array_multisort(array_column($exams, 'student_number'), SORT_ASC, $exams);
@@ -55,6 +54,7 @@ if (isset($_GET['sort'])) {
     if ($_GET['sort'] == 'goukei') {
         array_multisort(array_column($exams, 'goukei'), SORT_DESC, $exams);
     }
+    
 }
 
 ?>
@@ -78,17 +78,19 @@ if (isset($_GET['sort'])) {
         <?php } ?>
     </ul>
 
+    <p>テスト種類:<?php if (isset($_GET['test_name'])) {
+        echo $_GET['test_name'];
+    } else {
+        echo '全テスト';
+    } ?></p>
+
     <h3>検索</h3>
     <form action="" method="get">
         <p>名前</p>
-        <input type="text" name="name" value="<?php if (isset($_GET['name'])) {
-                                                    echo htmlspecialchars($_GET['name']);
-                                                } ?>">
+        <input type="text" name="name" value="<?php if (isset($_GET['name'])) {echo $_GET['name'];} ?>">
 
         <p>学生番号</p>
-        <input text="number" name="number" value="<?php if (isset($_GET['number'])) {
-                                                        echo htmlspecialchars($_GET['number']);
-                                                    } ?>">
+        <input text="number" name="number" value="<?php if (isset($_GET['number'])) { echo $_GET['number'];} ?>">
 
         <button type="submit">検索</button>
     </form>
