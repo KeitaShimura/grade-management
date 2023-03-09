@@ -3,7 +3,9 @@
 require_once(__DIR__ . '/../func/db_connect.php');
 $title = 'トップページ';
 $error = null;
+
 if (!empty($_GET)) {
+    //エラー項目の確認
     if ($_GET['id'] == '') {
         $error['id'] = 'blank';
     }
@@ -16,17 +18,30 @@ if (!empty($_GET)) {
         $exams = $db->prepare('SELECT E.*,T.name as t_name,S.name as s_name,S.number as s_number,S.id as s_id FROM exams AS E INNER JOIN tests as T ON E.test_id=T.id INNER JOIN students as S ON E.student_id=S.id WHERE student_id=? ORDER BY E.id ASC ');
         $exams->execute(array($_GET['id']));
         $exams = $exams->fetchAll();
+
+        //グラフ用のデータ作成
+        $totalScores = [];
+        $testNames = [];
+        foreach ($exams as $e) {
+            $totalScores[] = $e['goukei'];
+            $testNames[] = $e['t_name'];
+        }
+        $totalScores = json_encode($totalScores);
+        $testNames = json_encode($testNames);
     } else {
         header('Location:index.php');
         exit();
     }
 }
 ?>
+<?php include('../components/header.php');  ?>
 
-<h1><?php echo htmlspecialchars($student['name']); ?>の成績</h1>
+<h1><?php echo htmlspecialchars($student['name']); ?> 成績</h1>
 
 <a href="index.php">生徒一覧に戻る</a>
-
+<div>
+    <canvas id="myChart"></canvas>
+</div>
 <table>
     <tr>
         <th>ID</th>
@@ -60,10 +75,31 @@ if (!empty($_GET)) {
     <?php } ?>
 </table>
 </body>
-</body>
 
+<script>
+    const ctx = document.getElementById('myChart');
 
+    let scores = JSON.parse('<?php echo $totalScores; ?>');
+    let labelNames = JSON.parse('<?php echo $testNames; ?>');
 
-</body>
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labelNames,
+            datasets: [{
+                label: '合計点',
+                data: scores,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 
 </html>
