@@ -55,9 +55,6 @@ $_SESSION['token'] = $token;
             <input type="reset" class="btn btn-danger" value="リセット">
         </div>
     </form>
-    <form method="POST" action="destroy.php?id=<?php print($student['id']); ?>">
-        <input type="submit" class="btn btn-danger" value="削除">
-    </form>
     <a href="index.php">戻る</a>
 </body>
 
