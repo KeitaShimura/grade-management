@@ -66,6 +66,7 @@ $students = $db->query('SELECT * FROM students');
                                     <div class="modal-body">
                                         <form id="save-data" name="task_form" onsubmit="update()">
                                             <input type="hidden" id="id" name="id" value="<?php echo $student['id']; ?>">
+                                            <input type="hidden" id="token" name="token" value="<?= htmlspecialchars($token, ENT_COMPAT, 'UTF-8'); ?>">
                                             <p>学年</p>
                                             <select id="year" required name="year">
                                                 <option type="hidden"><?php echo $student['class'] ?></option>
@@ -94,30 +95,32 @@ $students = $db->query('SELECT * FROM students');
                             </div>
                         </div>
                     </td>
-                    <td><!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Launch demo modal
-                        </button>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ...
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button id="delete_button" type="button" class="btn btn-danger" onclick="deleteStudent(<?php echo ($student['id']) ?>)">Save changes</button>
-                                    </div>
+                    <td>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Launch static backdrop modal
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button id="delete_button" type="button" class="btn btn-danger" onclick="deleteStudent(<?php echo ($student['id']) ?>)">Save changes</button>
                                 </div>
                             </div>
                         </div>
-                    </td>
+                    </div>
+                    <td>
                 </tr>
 
 

@@ -31,6 +31,7 @@ $tests = $db->query('SELECT * FROM tests');
                     <th>学年</th>
                     <th>テスト名</th>
                     <th>編集</th>
+                    <th>削除</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,9 +41,8 @@ $tests = $db->query('SELECT * FROM tests');
                         <td><?php echo ($test['id']) ?></td>
                         <td><?php echo ($test['year']); ?></td>
                         <td><?php echo ($test['name']); ?></td>
-                        <td><a href="edit.php?id=<?php print($test['id']); ?>" class="btn btn-primary">変更</a></td>
                         <td><!-- Button trigger modal -->
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Launch demo modal
                             </button>
 
@@ -55,16 +55,61 @@ $tests = $db->query('SELECT * FROM tests');
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            ...
+                                            <form id="save-data" name="task_form" onsubmit="update()">
+                                                <input type="hidden" id="id" name="id" value="<?php echo $test['id']; ?>">
+                                                <p>学年</p>
+                                                <select required name="year">
+                                                    <option type="hidden"><?php echo $test['year'] ?></option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                </select>
+                                                <select required name="name">
+                                                    <option type="hidden"><?php echo $test['name'] ?></option>
+                                                    <option>前期中間テスト</option>
+                                                    <option>前期期末テスト</option>
+                                                    <option>後期中間テスト</option>
+                                                    <option>後期期末テスト</option>
+                                                </select>
+                                                <div>
+                                                    <button>Save changes</button>
+
+                                                </div>
+                                            </form>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button id="delete_button" type="button" class="btn btn-danger" onclick="deleteTest(<?php echo ($test['id']) ?>)">削除</button>
+                                            <button id="delete_button" type="button" class="btn btn-success" onclick="update()">Save changes</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </td>
+                        <td>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Launch static backdrop modal
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ...
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button id="delete_button" type="button" class="btn btn-danger" onclick="deleteTest(<?php echo ($test['id']) ?>)">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <td>
                     </tr>
 
                 <?php endwhile; ?>
@@ -72,6 +117,27 @@ $tests = $db->query('SELECT * FROM tests');
         </table>
     </article>
     <script>
+        function update() {
+            const id = document.task_form.id.value;
+            const year = document.task_form.year.value;
+            const name = document.task_form.name.value;
+
+            const data = new FormData();
+            data.append('id', id);
+            data.append('year', year);
+            data.append('name', name);
+
+            const xml = new XMLHttpRequest();
+            xml.open('POST', 'update.php', true);
+            xml.send(data);
+
+            xml.onreadystatechange = function() {
+                if (xml.readyState == 4 && xml.status == 200) {
+                    console.log(xml.responseText);
+                }
+            }
+        }
+
         function deleteTest(id) {
             var delete_url = "destroy.php?id=" + id;
             var target = document.getElementById('delete_button');
